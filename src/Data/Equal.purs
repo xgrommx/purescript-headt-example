@@ -28,10 +28,10 @@ instance hfunctorEqualF :: HFunctor EqualF where
 
 -- algebras
 
-instance evalEqualF :: Eval EqualF a where
+instance evalEqualF :: Eval EqualF where
   eval (EqualF (Identity x) (Identity y) p) = Identity $ coerceSymm p $ x == y
 
-instance evalValueEqualF :: EvalValue EqualF a where
+instance evalValueEqualF :: EvalValue EqualF where
   pEvalValue (EqualF (VInt x _) (VInt y _) p) = VBool (x == y) p
 
 -- typelevel label

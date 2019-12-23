@@ -4,27 +4,28 @@ import Data.Symbol (class IsSymbol, SProxy(..))
 import Data.Value (Value)
 import HFunctor.Variant (HProxy, HVariantF)
 import HFunctor.Variant as HVF
+import Higher (HAlgebra)
 import Partial.Unsafe (unsafePartial)
 import Prim.Row as R
 import Prim.RowList as RL
 import Type.Data.RowList (RLProxy(..))
 
-class EvalValue h a where
+class EvalValue h where
   -- this is partial variant of algebra
-  pEvalValue :: Partial => h Value a -> Value a
+  pEvalValue :: Partial => HAlgebra h Value
 
-evalValue :: forall h a. EvalValue h a => h Value a -> Value a
+evalValue :: forall h. EvalValue h => HAlgebra h Value
 evalValue = unsafePartial pEvalValue
 
-class EvalValueHVFRL (rl :: RL.RowList) (row :: # Type) a | rl -> row where
-  evalValueHVFRL :: RLProxy rl -> HVariantF row Value a -> Value a
+class EvalValueHVFRL (rl :: RL.RowList) (row :: # Type) | rl -> row where
+  evalValueHVFRL :: RLProxy rl -> HAlgebra (HVariantF row) Value
 
-instance evalValueHVFRLNil :: EvalValueHVFRL RL.Nil () a where
+instance evalValueHVFRLNil :: EvalValueHVFRL RL.Nil () where
   evalValueHVFRL _ = HVF.case_
 
-instance evalValueHVFRLCons :: (IsSymbol l, EvalValue h a, EvalValueHVFRL rl r a, R.Cons l (HProxy h) r r') => EvalValueHVFRL (RL.Cons l (HProxy h) rl) r' a where
+instance evalValueHVFRLCons :: (IsSymbol l, EvalValue h, EvalValueHVFRL rl r, R.Cons l (HProxy h) r r') => EvalValueHVFRL (RL.Cons l (HProxy h) rl) r' where
   evalValueHVFRL _ = HVF.on l evalValue (evalValueHVFRL (RLProxy :: RLProxy rl)) where
     l = SProxy :: _ l
 
-instance evalValueHVariantF :: (RL.RowToList row rl, EvalValueHVFRL rl row a) => EvalValue (HVariantF row) a where
+instance evalValueHVariantF :: (RL.RowToList row rl, EvalValueHVFRL rl row) => EvalValue (HVariantF row) where
   pEvalValue = evalValueHVFRL (RLProxy :: RLProxy rl)

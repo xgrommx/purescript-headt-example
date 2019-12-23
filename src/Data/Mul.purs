@@ -28,10 +28,10 @@ instance hfunctorMulF :: HFunctor MulF where
 
 -- algebras
 
-instance evalMulF :: Eval MulF a where
+instance evalMulF :: Eval MulF where
   eval (MulF (Identity x) (Identity y) p) = Identity $ coerceSymm p $ x * y
 
-instance evalValueMulF :: EvalValue MulF a where
+instance evalValueMulF :: EvalValue MulF where
   pEvalValue (MulF (VInt x _) (VInt y _) p) = VInt (x * y) p
 
 -- typelevel label

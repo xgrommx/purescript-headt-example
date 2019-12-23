@@ -29,10 +29,10 @@ instance hfunctorIfF :: HFunctor IfF where
 
 -- algebras
 
-instance evalIfF :: Eval IfF a where
+instance evalIfF :: Eval IfF where
   eval (IfF (Identity c) (Identity x) (Identity y) _) = Identity $ if c then x else y
 
-instance evalValueIfF :: EvalValue IfF a where
+instance evalValueIfF :: EvalValue IfF where
   pEvalValue (IfF (VBool c _) x y p) = if c then x else y
 
 -- typelevel label

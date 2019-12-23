@@ -29,10 +29,10 @@ instance hfunctorNotF :: HFunctor NotF where
 
 -- algebras
 
-instance evalNotF :: Eval NotF a where
+instance evalNotF :: Eval NotF where
   eval (NotF (Identity x) p) = Identity $ coerceSymm p $ P.not x
 
-instance evalValueNotF :: EvalValue NotF a where
+instance evalValueNotF :: EvalValue NotF where
   pEvalValue (NotF (VBool x _) p) = VBool (P.not x) p
 
 -- typelevel label

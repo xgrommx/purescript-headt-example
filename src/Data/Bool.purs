@@ -28,10 +28,10 @@ instance hfunctorBoolF :: HFunctor BoolF where
 
 -- algebras
 
-instance evalBoolF :: Eval BoolF a where
+instance evalBoolF :: Eval BoolF where
   eval (BoolF x p) = Identity $ coerceSymm p $ x
 
-instance evalValueBoolF :: EvalValue BoolF a where
+instance evalValueBoolF :: EvalValue BoolF where
   pEvalValue (BoolF x p) = VBool x p
 
 -- typelevel label

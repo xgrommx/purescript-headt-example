@@ -28,10 +28,10 @@ instance hfunctorAddF :: HFunctor AddF where
 
 -- algebras
 
-instance evalAddF :: Eval AddF a where
+instance evalAddF :: Eval AddF where
   eval (AddF (Identity x) (Identity y) p) = Identity $ coerceSymm p $ x + y
 
-instance evalValueAddF :: EvalValue AddF a where
+instance evalValueAddF :: EvalValue AddF where
   pEvalValue (AddF (VInt x _) (VInt y _) p) = VInt (x + y) p
 
 -- typelevel label

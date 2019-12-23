@@ -28,10 +28,10 @@ instance hfunctorValF :: HFunctor ValF where
 
 -- algebras
 
-instance evalValF :: Eval ValF a where
+instance evalValF :: Eval ValF where
   eval (ValF x p) = Identity $ coerceSymm p $ x
 
-instance evalValueValF :: EvalValue ValF a where
+instance evalValueValF :: EvalValue ValF where
   pEvalValue (ValF x p) = VInt x p
 
 -- typelevel label

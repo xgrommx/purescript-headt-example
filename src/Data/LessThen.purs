@@ -28,10 +28,10 @@ instance hfunctorLessThanF :: HFunctor LessThanF where
 
 -- algebras
 
-instance evalLessThanF :: Eval LessThanF a where
+instance evalLessThanF :: Eval LessThanF where
   eval (LessThanF (Identity x) (Identity y) p) = Identity $ coerceSymm p $ x < y
 
-instance evalValueLessThanF :: EvalValue LessThanF a where
+instance evalValueLessThanF :: EvalValue LessThanF where
   pEvalValue (LessThanF (VInt x _) (VInt y _) p) = VBool (x < y) p
 
 -- typelevel label
