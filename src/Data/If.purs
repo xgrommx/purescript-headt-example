@@ -4,7 +4,7 @@ import Prelude
 
 import Algebra.Eval (class Eval)
 import Data.Either (Either)
-import Data.EvalValue (class EvalValue)
+import Algebra.EvalValue (class EvalValue)
 import Data.Identity (Identity(..))
 import Data.Leibniz (type (~))
 import Data.Lens (Prism', prism', re, review)

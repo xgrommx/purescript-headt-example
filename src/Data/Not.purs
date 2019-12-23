@@ -3,7 +3,7 @@ module Data.Not where
 import Prelude
 
 import Algebra.Eval (class Eval)
-import Data.EvalValue (class EvalValue)
+import Algebra.EvalValue (class EvalValue)
 import Data.Identity (Identity(..))
 import Data.Leibniz (type (~), coerceSymm)
 import Data.Lens (Prism', prism', re, review)

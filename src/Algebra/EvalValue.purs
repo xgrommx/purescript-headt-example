@@ -1,4 +1,4 @@
-module Data.EvalValue where
+module Algebra.EvalValue where
 
 import Data.Symbol (class IsSymbol, SProxy(..))
 import Data.Value (Value)
